@@ -70,7 +70,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Taipei',
 
     /*
     |--------------------------------------------------------------------------
@@ -159,7 +159,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Sujip\Guid\GuidServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -182,6 +182,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'Guid' => Sujip\Guid\Guid::class,
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 

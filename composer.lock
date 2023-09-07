@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa322c53454393ed775cfe4807d54a50",
+    "content-hash": "2efb9c4981a73b160322381dc13734d4",
     "packages": [
         {
             "name": "brick/math",
@@ -3090,6 +3090,72 @@
                 }
             ],
             "time": "2023-04-15T23:01:58+00:00"
+        },
+        {
+            "name": "sudiptpa/guid",
+            "version": "v1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sudiptpa/guid.git",
+                "reference": "270fb4d270bedbfffe2270c43320cad8cbaf510f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sudiptpa/guid/zipball/270fb4d270bedbfffe2270c43320cad8cbaf510f",
+                "reference": "270fb4d270bedbfffe2270c43320cad8cbaf510f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                },
+                "laravel": {
+                    "aliases": {
+                        "Guid": "Sujip\\Guid\\Facades\\Guid"
+                    },
+                    "providers": [
+                        "Sujip\\Guid\\GuidServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Sujip\\Guid\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sujip Thapa",
+                    "email": "sudiptpa@gmail.com",
+                    "homepage": "https://sujipthapa.co",
+                    "role": "Web Developer"
+                }
+            ],
+            "description": "A Simple GUID generator Package for PHP.",
+            "homepage": "https://github.com/sudiptpa/guid",
+            "keywords": [
+                "guid"
+            ],
+            "support": {
+                "issues": "https://github.com/sudiptpa/guid/issues",
+                "rss": "https://github.com/sudiptpa/guid/releases.atom",
+                "source": "https://github.com/sudiptpa/guid"
+            },
+            "time": "2020-08-08T10:41:26+00:00"
         },
         {
             "name": "symfony/console",
@@ -8054,7 +8120,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.1"
+        "php": "^8.1",
+        "ext-pdo": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
