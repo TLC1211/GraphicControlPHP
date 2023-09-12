@@ -19,6 +19,9 @@ Route::get('/', function () {
 Route::get('/csrf', function () {
     return csrf_token();
 });
+Route::get('/T1', function () {
+    return view('T1');
+});
 // level_0
 //Route::get('/level_0', function () {
 //    $x = 17;
