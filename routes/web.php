@@ -11,13 +11,17 @@ Route::get('/Test', function () {
 });
 
 Route::get('/', function () {
-    return Redirect()->route('Dashboard.WebIndex');
+    return Redirect()->route('Dashboard.WebIndex'); //直接帶到第17列
 });
 
 Route::get('/dashboard', [DashboardController::class, 'Index'])->name('Dashboard.WebIndex');
 Route::get('/mb/dashboard', [DashboardController::class, 'mb_Index'])->name('Dashboard.MbIndex');
 
 Route::get('/set', [SetPageController::class, 'Index'])->name('set.WebIndex');
+Route::get('/LineAPI', [SetPageController::class, 'LineAPI'])->name('set.WebIndex.LineAPI');
+Route::get('/EmailAPI', [SetPageController::class, 'EmailAPI'])->name('set.WebIndex.EmailAPI');
+Route::get('/SMSAPI', [SetPageController::class, 'SMSAPI'])->name('set.WebIndex.SMSAPI');
+
 Route::get('/mb/set', [SetPageController::class, 'mb_Index'])->name('set.MbIndex');
 
 Route::get('/Component', [ComponentController::class, 'Index'])->name('Component.WebIndex');
