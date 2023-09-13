@@ -1,0 +1,315 @@
+* {
+    margin: 0;
+    /* 外部邊框為零
+        Ref: https://developer.mozilla.org/zh-CN/docs/Web/CSS/margin
+    */
+    padding: 0;
+    /* 外部邊框為零
+        Ref: https://developer.mozilla.org/zh-CN/docs/Web/CSS/padding
+    */
+    text-decoration: none;
+    /*  底線 線段取消  */
+    box-sizing: border-box;
+    /*  尺寸統一為 border-box  */
+}
+
+body {
+    overflow-x: hidden;
+    /*  X軸滾輪隱藏   */
+    overflow-y: auto;
+    /*  Y軸滾輪自動   */
+    height: calc(var(--vh, 1vh) * 100);
+    /* 動態高度計算 宣告 --vh 初始化為 1vh  */
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+    background: linear-gradient(180deg, #4A5060 0%, #363C48 100%) fixed;
+}
+
+h1, .h1, h2, .h2, h3, .h3, .headline, p {
+    margin-bottom: 0;
+    /*  外部底部指定為 零 */
+    color: #FFFFFF;
+    /* 顏色: 白色   */
+}
+
+h3, .h3 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/*---------------------------------------------------------*/
+
+.title-bar {
+    padding: 24px;
+}
+
+.title-bar .h3 {
+    padding-top: 1rem;
+}
+
+.titlebar-shrink {
+    background: rgba(74, 80, 96, 0.7);
+    padding: 8px 24px 16px 24px;
+    backdrop-filter: blur(5px);
+    /* 背景虛化效果: 模糊半徑為5像素 */
+}
+
+.open_sidebar {
+    width: 0;
+    position: fixed;
+    padding-top: 20px;
+    box-shadow: 10px 10px 10px rgba(54, 60, 72, 0.5);
+    height: calc(var(--vh, 1vh) * 100);
+    /* 動態高度計算 宣告 --vh 初始化為 1vh  */
+    background: linear-gradient(180deg, #4A5060 0%, #363C48 100%);
+    overflow-x: hidden;
+    transition: 0.5s;
+    /* 0.5秒會做完動作 */
+    z-index: 99999;
+    /* 層級最高層 */
+}
+
+.btn_menu {
+    border: none;
+    color: #FFFFFF;
+}
+
+.menu img, a img {
+    width: 1rem;
+}
+
+.open_sidebar .btn_menu, .form-control {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.px-0, .menu {
+    padding-left: 0;
+}
+
+/*---------------------------------------------------------*/
+
+.box {
+    padding: 1rem 1.25rem;
+    background: #545969;
+    border-radius: 5px;
+    text-align: left;
+    height: 100%;
+    box-shadow: 10px 10px 10px rgba(54, 60, 72, 0.5);
+}
+
+.box p, .box label {
+    color: #FFFFFF;
+}
+
+.mb-3, .box .card-header {
+    margin-bottom: 1rem;
+}
+
+.content {
+    padding: 116px 24px 16px 24px;
+}
+
+.highcharts-credits {
+    display: none;
+}
+
+.sub {
+    font-size: 0.8rem;
+    color: #FFFFFF;
+    font-weight: 400;
+}
+
+.headline {
+    font-size: 1.125rem;
+    font-weight: 400;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+/*-------------------------- Y M Button ok ------------------------------*/
+
+.btn_switch {
+    width: 3rem;
+    height: 3rem;
+    color: #363C48;
+    border-radius: 50px;
+    background-image: url('/images/bg/btn_off.png');
+}
+
+.btn_switch, .btn_switch2, .btn_switch3, .btn_switch4, .btn_switch5 {
+    border: none;
+    background-size: contain;
+}
+
+.btn_switch.active {
+    background-image: url('/images/bg/btn_on.png');
+    color: #FFFFFF;
+}
+
+.btn_switch_bg {
+    margin-top: 1.5rem;
+    background: linear-gradient(180deg, #4A5060 0%, #363C48 100%);
+    border-radius: 8px;
+    max-width: 96px;
+}
+
+.mx-auto, .btn_switch_bg {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.btn_switch2 {
+    width: 4rem;
+    height: 4rem;
+    margin: 1rem;
+    background-image: url('/images/bg/btn_fan_off.png');
+    transition: 0.5s;
+}
+
+.btn_switch2.active {
+    background-image: url('/images/bg/btn_fan.png');
+    animation: rotate 1s infinite linear;
+    /*  動作事件: ____  1s 無限循環 動畫的時間*/
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.btn_switch3, .btn_switch3:hover {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100px;
+    background-image: url('/images/bg/btn_off_big.png');
+}
+
+.btn_switch3.active {
+    color: #FFFFFF;
+    background: linear-gradient(140deg, #F48096 0%, #EB244B 100%);
+}
+
+.btn_switch4, .btn_switch4:hover {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100px;
+    background-image: url('/images/bg/btn_off_big.png');
+}
+
+.btn_switch4.active {
+    color: #FFFFFF;
+    background: linear-gradient(140deg, #FEEC3F 0%, #c9b30d 100%);
+}
+
+.btn_switch5, .btn_switch5:hover {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100px;
+    background-image: url('/images/bg/btn_off_big.png');
+}
+
+.btn_switch5.active {
+    color: #FFFFFF;
+    background: linear-gradient(140deg, #5AFF93 0%, #06A525 100%);
+}
+
+.align-middle {
+    display: inline-flex;
+    align-items: center;
+}
+
+
+/* ----------------------------------- 輸入 系列 ok  ----------------------------------------- */
+.form-control {
+    background: none;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+}
+
+.form-control:focus {
+    background: transparent;
+    /* 背景顏色: 透明 */
+    border-color: #fff;
+    color: #fff;
+    box-shadow: none;
+}
+
+option {
+    background: transparent;
+    border-color: #fff;
+    color: #000;
+    box-shadow: none;
+}
+
+/* ----------------------------------- Jump 系列 ok ----------------------------------------- */
+.modal-content {
+    background: #5C6172;
+}
+
+.modal-header {
+    color: #fff;
+    border: none;
+}
+
+.modal-footer {
+    justify-content: center;
+    /* 水平軸線: 置中  */
+    border: none;
+}
+
+.btn_main {
+    background: #5AE0FF;
+    border: none;
+}
+
+.btn_main:hover, .btn_main.active {
+    background: #5AE0FF;
+    border: none;
+    color: #363C48;
+}
+
+.btn_sec {
+    background: #676D81;
+    border: none;
+    color: #FFFFFF;
+}
+
+.btn_sec:hover, .btn_sec.active {
+    background: #676D81;
+    border: none;
+    color: #FFFFFF;
+}
+
+/* ----------------------------------- Table 系列 ----------------------------------------- */
+.table {
+    text-align: center;
+}
+
+.table thead, .table tbody {
+    border: 1px solid #676D81;
+}
+
+.table thead {
+    background: #5C6172;
+}
+
+.table th, .table td {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: #FFFFFF;
+    vertical-align: middle;
+    /* 垂直方式: 與父元素的中心對齊  */
+    border: none;
+}

@@ -1,34 +1,28 @@
 <?php
 
+use App\Http\Controllers\ChartController;
+use App\Http\Controllers\ComponentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SetPageController;
 use Illuminate\Support\Facades\Route;
 
-//API上傳
-Route::get('GetAll', [DashboardController::class, 'GetAll'])->name('GetAll');
-Route::get('GetByAddress', [DashboardController::class, 'GetByAddress'])->name('GetByAddress');
-Route::post('in_A', [DashboardController::class, 'in_A'])->name('in_A');
-Route::put('upd_B', [DashboardController::class, 'upd_B'])->name('upd_B');
-Route::delete('del_C', [DashboardController::class, 'del_C'])->name('del_C');
-//Js
-Route::get('js', [DashboardController::class, 'js'])->name('js');
-
+Route::get('/Test', function () {
+    return view('Test');
+});
 
 Route::get('/', function () {
-    return view('welcome');
+    return Redirect()->route('Dashboard.WebIndex');
 });
-Route::get('/csrf', function () {
-    return csrf_token();
-});
-Route::get('/T1', function () {
-    return view('T1');
-});
-// level_0
-//Route::get('/level_0', function () {
-//    $x = 17;
-//    $y = 8;
-//    echo($x + $y).'<br>'; # 25
-//    echo($x - $y).'<br>'; # 9
-//    echo($x * $y).'<br>'; # 136
-//    echo($x / $y).'<br>'; # 2.125
-//    echo($x % $y).'<br>'; # 1
-//});
+
+Route::get('/dashboard', [DashboardController::class, 'Index'])->name('Dashboard.WebIndex');
+Route::get('/mb/dashboard', [DashboardController::class, 'mb_Index'])->name('Dashboard.MbIndex');
+
+Route::get('/set', [SetPageController::class, 'Index'])->name('set.WebIndex');
+Route::get('/mb/set', [SetPageController::class, 'mb_Index'])->name('set.MbIndex');
+
+Route::get('/Component', [ComponentController::class, 'Index'])->name('Component.WebIndex');
+Route::get('/mb/Component', [ComponentController::class, 'mb_Index'])->name('Component.MbIndex');
+
+Route::get('/charSet', [ChartController::class, 'Index'])->name('charSet.WebIndex');
+Route::get('/mb/charSet', [ChartController::class, 'mb_Index'])->name('charSet.MbIndex');
+

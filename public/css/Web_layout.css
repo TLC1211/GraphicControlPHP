@@ -1,0 +1,366 @@
+* {
+    margin: 0;
+    /* 外部邊框為零
+        Ref: https://developer.mozilla.org/zh-CN/docs/Web/CSS/margin
+    */
+    padding: 0;
+    /* 外部邊框為零
+        Ref: https://developer.mozilla.org/zh-CN/docs/Web/CSS/padding
+    */
+    text-decoration: none;
+    /*  底線 線段取消  */
+    box-sizing: border-box;
+    /*  尺寸統一為 border-box  */
+}
+
+body {
+    overflow-x: auto;
+    /*  X軸滾輪自動   */
+    overflow-y: hidden;
+    /*  Y軸滾輪隱藏    */
+    font-family: "Noto Sans TC", sans-serif;
+    /*  字型   */
+    font-size: 16px;
+    /*  字型尺寸    */
+    letter-spacing: 1px;
+    /*  文字字元間距   */
+    background: linear-gradient(180deg, #4A5060 0%, #363C48 100%) fixed;
+    /*  背景為: 漸層式擴展, 180度 某顏色 0% 至 某顏色 100% 固定  */
+    padding: 1.25rem 2rem 0 2rem;
+}
+
+h1, .h1, h2, .h2, h3, .h3, .headline, p {
+    margin-bottom: 0;
+    /*  外部底部指定為 零 */
+    color: #FFFFFF;
+    /*  文字顏色: 白色  */
+}
+
+h3, .h3 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    /* 字型寬度  */
+    line-height: 1.5;
+    /* 文字的行高  */
+}
+
+.box {
+    padding: 1rem 1.25rem;
+    background: #545969;
+    border-radius: 5px;
+    /*  外框角度    */
+    text-align: left;
+    /*  文字方向屬性 */
+    height: 100%;
+    /*  本體高度  */
+    box-shadow: 10px 10px 10px rgba(54, 60, 72, 0.5);
+    /*  框陰影: 上 右 下 左  */
+}
+
+.box p, .box label {
+    color: #FFFFFF;
+}
+
+.box.overflow-y-auto {
+    padding-bottom: 80px;
+    max-height: 85vh;
+}
+
+/* ---------------------------------------------------------------------------- */
+.title-bar {
+    padding-bottom: 1rem;
+    /*  內部邊框底部指定為 1rem */
+}
+
+div li {
+    margin-bottom: 1.5rem;
+    padding: 10px 20px;
+}
+
+.btn_menu {
+    border-radius: 50px;
+    background: none;
+    /*  背景 為 none */
+    border: none;
+    /*  邊框 為 none */
+    color: #FFFFFF;
+    /*  顏色白色, 強制執行 */
+    cursor: pointer;
+    /*  游標屬性 */
+    position: relative;
+    /*  位置: 當下為相對位置 */
+    overflow: hidden;
+    /*  溢出邊界範圍  */
+    transition: ease-in-out 0.5s;
+    /*  轉場效果, 事件發生執行速率
+        貝茲曲線
+        Ref: https://www.casper.tw/css/2013/08/24/css-transtion-speed/
+    */
+    box-shadow: none;
+}
+
+.btn_menu.active {
+    background: #507183;
+    border: none;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    transition: 0.5s;
+}
+
+.btn_menu:hover {
+    color: #FFFFFF !important;
+}
+
+/* ---------------------------------- 圖表 ------------------------------------------ */
+.box .card-header {
+    margin-bottom: 1rem;
+}
+
+.btn_text {
+    border: none;
+    color: #5AE0FF;
+}
+
+.btn_text:hover, .btn_text.active {
+    border: none;
+    color: #5AE0FF !important;
+}
+
+.box a {
+    float: right;
+    /*  浮動的屬性, 向右邊  */
+}
+
+.highcharts-credits {
+    display: none;
+    /*  顯示狀況, None(無) 強制執行  */
+}
+
+/* ----------------------------------- M6 ----------------------------------------- */
+.btn_switch, .btn_switch2, .btn_switch3, .btn_switch4, .btn_switch5 {
+    border: none;
+    background-size: contain;
+    /* 背景尺寸: contain(不變形) 強制   */
+}
+
+.btn_switch, .btn_switch:hover {
+    width: 3rem;
+    /* 寬度  */
+    height: 3rem;
+    /* 高度  */
+    color: #363C48;
+    border-radius: 50px;
+    background-image: url('/images/bg/btn_off.png');
+    /* 背景圖片: 指定讀取位置  */
+}
+
+.btn_switch.active {
+    background-image: url('/images/bg/btn_on.png');
+    color: #FFFFFF;
+}
+
+.btn_switch_bg {
+    margin-top: 1.5rem;
+    /* 外部邊框上方  */
+    background: linear-gradient(180deg, #4A5060 0%, #363C48 100%);
+    border-radius: 8px;
+    max-width: 96px;
+    /* 限制最大寬度  */
+}
+
+.mx-auto, .btn_switch_bg {
+    margin-right: auto;
+    margin-left: auto;
+    /* 外部邊框 右邊 左邊 都採取 自動強制  */
+}
+
+.btn_switch2 {
+    width: 4rem;
+    height: 4rem;
+    margin: 1rem;
+    background-image: url('/images/bg/btn_fan_off.png');
+}
+
+.btn_switch2.active {
+    background-image: url('/images/bg/btn_fan.png');
+    animation: rotate 1s infinite linear;
+    /* 動畫: keyframes宣告名稱 秒數 永無止盡反覆執行  */
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+        /* 0% 旋轉: 0度 */
+    }
+    50% {
+        transform: rotate(180deg);
+        /* 50% 旋轉: 180度 */
+    }
+    100% {
+        transform: rotate(360deg);
+        /* 100% 旋轉: 360度 */
+    }
+}
+
+.sub {
+    font-size: 0.8rem;
+    color: #FFFFFF;
+    font-weight: 400;
+}
+
+.headline {
+    font-size: 1.125rem;
+    font-weight: 400;
+}
+
+.btn_switch3, .btn_switch3:hover {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100px;
+    background-image: url('/images/bg/btn_off_big.png');
+    color: #363C48;
+}
+
+.btn_switch3.active {
+    color: #FFFFFF;
+    background: linear-gradient(140deg, #F48096 0%, #EB244B 100%);
+}
+
+.btn_switch4, .btn_switch4:hover {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100px;
+    background-image: url('/images/bg/btn_off_big.png');
+    color: #363C48;
+}
+
+.btn_switch4.active {
+    color: #FFFFFF;
+    background: linear-gradient(140deg, #FEEC3F 0%, #c9b30d 100%);
+}
+
+.btn_switch5, .btn_switch5:hover {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100px;
+    background-image: url('/images/bg/btn_off_big.png');
+    color: #363C48;
+}
+
+.btn_switch5.active {
+    color: #FFFFFF;
+    background: linear-gradient(140deg, #5AFF93 0%, #06A525 100%);
+}
+
+.align-middle {
+    display: inline-flex;
+    /*  顯示屬性: 水平彈性伸縮  */
+    align-items: center;
+    /*  方向項目, 置中  */
+}
+
+/* ----------------------------------- 輸入 系列 ----------------------------------------- */
+.form-control {
+    color: #FFFFFF;
+    background: transparent;
+    /* 全透明 */
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-control:focus {
+    background: transparent;
+    /* 全透明 */
+    border-color: #fff;
+    color: #fff;
+    box-shadow: none;
+}
+
+option {
+    background: transparent;
+    /* 與上層同色系 */
+    border-color: #fff;
+    color: #000;
+    box-shadow: none;
+}
+
+#Input_Line {
+    margin-left: 15px;
+    /*  外部邊框 左邊, 15px  */
+}
+
+/* ----------------------------------- Jump 系列 ok  ----------------------------------------- */
+.modal {
+    color: #FFFFFF;
+}
+
+.modal-dialog {
+    margin: auto;
+}
+
+.modal-dialog.lg_modal {
+    max-width: 90%;
+    /*  最大寬度 90%  */
+}
+
+
+.modal-content {
+    background: #5C6172;
+}
+
+.modal-header {
+    border: none;
+}
+
+.modal-footer {
+    justify-content: center;
+    /*  主軸進行對齊: 置中  */
+    border: none;
+}
+
+.btn_main {
+    background: #5AE0FF;
+    border: none;
+}
+
+.btn_main:hover, .btn_main.active {
+    background: #5AE0FF;
+    border: none;
+    color: #363C48;
+}
+
+.btn_sec {
+    background: #676D81;
+    border: none;
+    color: #FFFFFF;
+}
+
+.btn_sec:hover, .btn_sec.active {
+    background: #676D81;
+    border: none;
+    color: #FFFFFF;
+}
+
+/* ----------------------------------- Chart 系列 ----------------------------------------- */
+.table {
+    text-align: center;
+}
+
+.table thead, .table tbody {
+    border: 1px solid #676D81;
+}
+
+.table thead {
+    background: #5C6172;
+}
+
+.table th, .table td {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: #FFFFFF;
+    vertical-align: middle;
+    /* 垂直方向: 中間 */
+    border: none;
+}
+
+
