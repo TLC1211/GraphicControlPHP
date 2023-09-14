@@ -15,19 +15,19 @@
             </tr>
             </thead>
             <tbody>
-            @for($i=0;$i<20;$i++)
+            @foreach($TmpChartCollect as $value)
                 <tr>
-                    <td>Y0</td>
-                    <td>0500</td>
+                    <td>{{$value['Remark']}}</td>
+                    <td>{{$value['Address']}}</td>
                     <td>
                         <button class="btn btn_main BtnChartSet"
-                                data-guid="xxxxx"
-                                data-address="xxxxxx"
-                                data-remark="xxxxxxx">編輯
+                                data-guid="{{$value['Guid']}}"
+                                data-address="{{$value['Address']}}"
+                                data-remark="{{$value['Remark']}}">編輯
                         </button>
                     </td>
                 </tr>
-            @endfor
+            @endforeach
             </tbody>
         </table>
     </div>
@@ -39,8 +39,10 @@
 
 @section('Js')
     <script>
+        let TmpGuid = null;
         let ChartSetModal = document.getElementById('ChartSetModal');
         let Modal_ChartSetModal = new bootstrap.Modal(ChartSetModal, {keyboard: false});
+        let TmpChartSetModal_Btn = null, TmpChartSetModal_BtnDismiss = null;
 
         $('.BtnChartSet').click(function (data) {
             TmpChartSetModal_Btn = $("#ChartSetModal_Btn");
@@ -48,14 +50,13 @@
 
             TmpGuid = data.target.dataset.guid
 
-            $("#ChartSetModal_Header").html(`${data.target.dataset.remark}`);
+            $("#ChartSetModal_Header").html(`${data.target.dataset.remark})`);
             $("#ChartSetModal_Body").html(`
-                <div class="col-xl-6 mb-6">
+                <div class="col-xl-6 col-lg-6 mb-6">
                     <label class="sub">備注</label>
                     <input id="ChartSet_Body_Remark" value="${data.target.dataset.remark}" class="form-control">
                 </div>
-
-                <div class="col-xl-6 mb-6">
+                <div class="col-xl-6 col-lg-6 mb-6">
                     <label class="sub">地址群</label>
                     <input id="ChartSet_Body_Address" value="${data.target.dataset.address}" class="form-control">
                 </div>
@@ -63,12 +64,22 @@
 
             Modal_ChartSetModal.show();
 
-            TmpChartSetModal_Btn.click(function (e) {
-            });
+            let TmpChartSet_Body_Remark = document.querySelector('#ChartSet_Body_Remark');
+            let TmpChartSet_Body_Address = document.querySelector('#ChartSet_Body_Address');
 
+            TmpChartSetModal_Btn.click(function (e) {
+                let Url = `${location.origin}/CharSetApi?Guid=${TmpGuid}&Upload=${JSON.stringify({
+                    Remark: TmpChartSet_Body_Remark.value,
+                    Address: TmpChartSet_Body_Address.value,
+                })}`;
+                fetch(Url).then(res => res.json()).then(data => {
+                    Modal_ChartSetModal.hide();
+                    location.reload();
+                });
+            });
             TmpChartSetModal_BtnDismiss.click(function (e) {
                 Modal_ChartSetModal.hide();
-                // location.reload();
+                location.reload();
             });
         });
         console.clear();

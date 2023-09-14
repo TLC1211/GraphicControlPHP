@@ -67,7 +67,7 @@
         $("#BtnLine").click(function (v) {
             let getLineToken = $('#Input_Line').val();
             let getLineGuid = v.target.dataset.guid;
-            fetch(`http://192.168.1.102:81/LineAPI?LineGuid=${getLineGuid}&LineToken=${getLineToken}`)
+            fetch(`http://127.0.0.1:81/LineAPI?LineGuid=${getLineGuid}&LineToken=${getLineToken}`)
                 .then(res => res.json())
                 .then(data =>{
                     //console.log(data);
@@ -96,13 +96,12 @@
             let TmpOwnTos = $('#Input_SMS_Tos').val();
             let getEmailGuid = v.target.dataset.guid;
             const Url = `http://127.0.0.1:81/SMSAPI?SmsGuid=${getEmailGuid}&SmsOwn=${TmpOwnID}&SmsPwd=${TmpOwnPassword}&ToSms=${TmpOwnTos}`;
-            console.log(Url);
 
-            // fetch(Url)
-            //     .then(res => res.json())
-            //     .then(data =>{
-            //         location.reload();
-            //     });
+            fetch(Url)
+                .then(res => res.json())
+                .then(data =>{
+                    location.reload();
+                });
 
         })
 

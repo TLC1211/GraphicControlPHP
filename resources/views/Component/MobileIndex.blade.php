@@ -18,49 +18,48 @@
                 </tr>
                 </thead>
                 <tbody>
-                @for($i=0;$i<5;$i++)
+                @foreach($TmpBitCells as $value)
                     <tr>
-                        <td>Y0</td>
-                        <td>0500</td>
+                        <td>{{$value['Name']}}</td>
+                        <td>{{$value['Address']}}</td>
                         <td>BitCells</td>
                         <td>
                             <button class="btn btn_main Btn_BitCells"
-                                    data-name="xxxxxx"
-                                    data-address="xxxxxxx"
-                                    data-notifystatus="xxxxxxxxx"
-                                    data-notifycollectdata="xxxxxxxxxxxxxx"
-                                    data-guid="xxxxxx">編輯
+                                    data-name="{{$value['Name']}}"
+                                    data-address="{{$value['Address']}}"
+                                    data-notifystatus="{{$value['NotifyStatus']}}"
+                                    data-notifycollectdata="{{$value['NotifyCollectData']}}"
+                                    data-guid="{{$value['Guid']}}">編輯
                             </button>
                         </td>
                     </tr>
-                @endfor
-                {{-- ################################################################### --}}
-                @for($i=0;$i<5;$i++)
+                @endforeach
+                {{-- ############################################## --}}
+                @foreach($TmpWordV as $value)
                     <tr>
-                        <td>Y0</td>
-                        <td>0500</td>
+                        <td>{{$value['Name']}}</td>
+                        <td>{{$value['Address']}}</td>
                         <td>Word</td>
                         <td>
                             <button class="btn btn_main Btn_Word"
-                                    data-name="xxxxxxx"
-                                    data-address="xxxxxx"
-                                    data-collectdata="xxxxxxxx"
-                                    data-notifystatus="xxxxxxxxxxxx"
-                                    data-notifycollectdata="xxxxxxxxxxxxxxxx"
-                                    data-guid="xxxxxxxxxxxx">編輯
+                                    data-name="{{$value['Name']}}"
+                                    data-address="{{$value['Address']}}"
+                                    data-collectdata="{{json_encode(($value['CollectData']))}}"
+                                    data-notifystatus="{{$value['NotifyStatus']}}"
+                                    data-notifycollectdata="{{json_encode($value['NotifyCollectData'])}}"
+                                    data-guid="{{$value['Guid']}}">編輯
                             </button>
                         </td>
                     </tr>
-                @endfor
-                {{-- ################################################################### --}}
-                @for($i=0;$i<5;$i++)
+                @endforeach
+                {{-- ############################################## --}}
+                @foreach($TmpStringV as $value)
                     <tr>
-                        <td>Y0</td>
-                        <td>0500</td>
+                        <td>{{$value['Name']}}</td>
+                        <td>{{$value['Address']}}</td>
                         <td>String</td>
-                        <td></td>
                     </tr>
-                @endfor
+                @endforeach
                 </tbody>
             </table>
         </div>
@@ -76,13 +75,17 @@
     <script>
         let BitCellsModal = document.getElementById('BitCellsModal');
         let Modal_BitCells = new bootstrap.Modal(BitCellsModal, {keyboard: false});
+        let TmpBitCellsModal_Btn = null, TmpBitCellsModal_BtnDismiss = null;
+        let TmpGuid = '';
 
         $('.Btn_BitCells').click(function (data) {
             TmpBitCellsModal_Btn = $("#BitCellsModal_Btn");
             TmpBitCellsModal_BtnDismiss = $("#BitCellsModal_BtnDismiss");
 
-            let TmpJsonCollectData = {'NotifyType': 0, 'NotifyPlatFrom': 0}; // 0:Line, 1:Email, 2:SMS
-            let TmpNotifyStatus = 0;
+            TmpGuid = data.target.dataset.guid
+
+            let TmpJsonCollectData = JSON.parse(data.target.dataset.notifycollectdata); // 0:Line, 1:Email, 2:SMS
+            let TmpNotifyStatus = parseInt(data.target.dataset.notifystatus);
 
             $("#BitCellsModal_Header").html(`${data.target.dataset.name} (${data.target.dataset.address})`);
             $("#BitCellsModal_Body").html(`
@@ -112,11 +115,24 @@
             Modal_BitCells.show();
 
             TmpBitCellsModal_Btn.click(function (e) {
+                let TmpBitCellsModal_Body_NotifyStatus = document.querySelector('#BitCellsModal_Body_NotifyStatus');
+                let TmpBitCellsModal_Body_NotifyType = document.querySelector('#BitCellsModal_Body_NotifyType');
+                let TmpBitCellsModal_Body_NotifyPlatFrom = document.querySelector('#BitCellsModal_Body_NotifyPlatFrom');
+
+                let Url = `http://127.0.0.1:81/ComponentApi?Guid=${TmpGuid}&Type=BitCell&Upload=${JSON.stringify({
+                    NotifyStatus: parseInt(TmpBitCellsModal_Body_NotifyStatus.value),
+                    NotifyType: parseInt(TmpBitCellsModal_Body_NotifyType.value),
+                    NotifyPlatFrom: parseInt(TmpBitCellsModal_Body_NotifyPlatFrom.value)
+                })}`;
+                fetch(Url).then(res => res.json()).then(data => {
+                    Modal_BitCells.hide();
+                    location.reload();
+                });
             });
 
             TmpBitCellsModal_BtnDismiss.click(function (e) {
                 Modal_BitCells.hide();
-                // location.reload();
+                location.reload();
             });
         });
 
@@ -124,22 +140,16 @@
 
         let WordModal = document.getElementById('WordModal');
         let Modal_Word = new bootstrap.Modal(WordModal, {keyboard: false});
+        let TmpWordModal_Btn = null, TmpWordModal_BtnDismiss = null;
+
         $('.Btn_Word').click(function (data) {
             TmpWordModal_Btn = $("#WordModal_Btn");
             TmpWordModal_BtnDismiss = $("#WordModal_BtnDismiss");
-
             TmpGuid = data.target.dataset.guid
 
-            let TmpJsonCollectData = {
-                'WordType': 'Word',
-                'SignedType': true,
-                'NumberOfDecimals': 0,
-                'HLValueConvert': 0,
-                'MaxValue': 30,
-                'MinValue': 0
-            };
-            let TmpJsonNotifyCollectData = 0; // 0:Line, 1:Email, 2:SMS
-            let TmpNotifyStatus = 0;
+            let TmpJsonCollectData = JSON.parse(data.target.dataset.collectdata);
+            let TmpJsonNotifyCollectData = JSON.parse(data.target.dataset.notifycollectdata); // 0:Line, 1:Email, 2:SMS
+            let TmpNotifyStatus = parseInt(data.target.dataset.notifystatus);
 
             $("#WordModal_Header").html(`${data.target.dataset.name} (${data.target.dataset.address})`);
             $("#WordModal_Body").html(`
@@ -210,11 +220,39 @@
             Modal_Word.show();
 
             TmpWordModal_Btn.click(function (e) {
+                let TmpWordModal_Body_WordType = document.querySelector('#WordModal_Body_WordType');
+                let TmpWordModal_Body_SignedType = document.querySelector('#WordModal_Body_SignedType');
+                let TmpWordModal_Body_NumberOfDecimals = document.querySelector('#WordModal_Body_NumberOfDecimals');
+                let TmpWordModal_Body_HLValueConvert = document.querySelector('#WordModal_Body_HLValueConvert');
+
+                let TmpWordModal_Body_MaxValue = document.querySelector('#WordModal_Body_MaxValue');
+                let TmpWordModal_Body_MinValue = document.querySelector('#WordModal_Body_MinValue');
+                let TmpWordModal_Body_NotifyStatus = document.querySelector('#WordModal_Body_NotifyStatus');
+                let TmpWordModal_Body_NotifyPlatFrom = document.querySelector('#WordModal_Body_NotifyPlatFrom');
+
+                let Url = `http://127.0.0.1:81/ComponentApi?Guid=${TmpGuid}&Type=Word&Upload=${JSON.stringify({
+                    CollectData: {
+                        WordType: TmpWordModal_Body_WordType.value,
+                        SignedType: (TmpWordModal_Body_SignedType.value === '1'),
+                        NumberOfDecimals: parseInt(TmpWordModal_Body_NumberOfDecimals.value),
+                        MaxValue: parseFloat(TmpWordModal_Body_MaxValue.value),
+                        MinValue: parseFloat(TmpWordModal_Body_MinValue.value),
+                        HLValueConvert: parseInt(TmpWordModal_Body_HLValueConvert.value),
+                    },
+                    NotifyStatus: parseInt(TmpWordModal_Body_NotifyStatus.value),
+                    NotifyCollectData: {
+                        NotifyPlatFrom: parseInt(TmpWordModal_Body_NotifyPlatFrom.value),
+                    },
+                })}`;
+                fetch(Url).then(res => res.json()).then(data => {
+                    Modal_BitCells.hide();
+                    location.reload();
+                });
             });
 
             TmpWordModal_BtnDismiss.click(function (e) {
                 Modal_Word.hide();
-                // location.reload();
+                location.reload();
             });
         });
     </script>
